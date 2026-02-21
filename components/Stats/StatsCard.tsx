@@ -4,7 +4,7 @@ type PropsType = {
   svg: ReactNode;
   color: string;
   heading: string;
-  price: string;
+  price: number | string;
   priceColor: string;
 };
 

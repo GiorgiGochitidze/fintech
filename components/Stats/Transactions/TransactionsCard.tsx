@@ -1,4 +1,11 @@
-const TransactionsCard = () => {
+
+type TransactionData = {
+  transactionHeader: string;
+  date: string;
+  transactionAmount: number;
+}
+
+const TransactionsCard = ({transactionHeader, date, transactionAmount}: TransactionData) => {
   return (
     <div className="max-[460px]:flex-col max-[460px]:items-start w-full h-auto p-2 justify-between pr-3 items-center flex bg-[#121212] rounded-sm h-25">
       <div className="w-auto h-auto flex items-center justify-start gap-2">
@@ -9,11 +16,11 @@ const TransactionsCard = () => {
         </div>
 
         <div className="text-sm">
-          <p>Tech Company Inc</p>
-          <p className="text-xs text-[#5C5C5C]">Feb 20</p>
+          <p>{transactionHeader}</p>
+          <p className="text-xs text-[#5C5C5C]">{date}</p>
         </div>
       </div>
-      <p className="max-[460px]:ml-auto font-bold text-sm text-[var(--transactions-income)]">+$5000.00</p>
+      <p className="max-[460px]:ml-auto font-bold text-sm text-[var(--transactions-income)]">${transactionAmount}</p>
     </div>
   );
 };

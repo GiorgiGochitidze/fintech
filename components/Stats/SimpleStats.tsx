@@ -1,29 +1,40 @@
+import { getAllTransactions, getBudgetLeft, getNetAmount, getTotalExpenses, getTotalIncome } from "@/lib/api";
 import ChartBar from "./Charts/ChartBar";
 import ChartPie from "./Charts/ChartPie";
 import ChartProgress from "./Charts/ProgressChart/ChartProgress";
 import StatsCard from "./StatsCard";
+import StatsHeader from "./StatsHeader";
 import Transactions from "./Transactions/Transactions";
 
-const SimpleStats = () => {
+export type Transaction = {
+  id: number;
+  type: 'income' | 'expense';
+  amount: number;
+  category: string;
+  date: string; // dates come as strings from JSON
+  budget: number;
+}
+
+const SimpleStats = async () => {
+  const [income, expense, net, budgetLeft, transactions] = await Promise.all([
+    getTotalIncome(),
+    getTotalExpenses(),
+    getNetAmount(),
+    getBudgetLeft(),
+    getAllTransactions(),
+  ]);
+  console.log(transactions[0])
+
+
   return (
     <div className="w-full h-auto flex flex-col gap-10 justify-center">
-      <div className="max-[460px]:flex-col max-[460px]:gap-5 max-[460px]:items-center w-full h-auto flex justify-between">
-        <div className="flex flex-col items-start max-[460px]:items-center">
-          <h2 className="font-bold text-2xl">Dashboard</h2>
-          <p className="max-[460px]:text-center text-[var(--secondary-text)]">
-            Overview for February 2026
-          </p>
-        </div>
-        <button className="max-[460px]:w-full max-[670px]:w-10 w-37.5 h-9.5 bg-white rounded-lg text-black flex justify-center items-center gap-2 hover:cursor-pointer hover:bg-[#E2E2E2]">
-          <span className="text-xl max-[670px]:text-2xl">+</span><span className="max-[670px]:hidden max-[460px]:flex"> Add Transaction</span>
-        </button>
-      </div>
+      <StatsHeader />
 
       <div className="w-full h-auto flex justify-between items-center gap-3 flex-wrap max-[460px]:justify-center">
         <StatsCard
           priceColor="text-green-700 dark:text-green-400"
           heading="Total Income"
-          price="5,000.00"
+          price={income.total.toLocaleString()}
           svg={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +61,7 @@ const SimpleStats = () => {
         <StatsCard
           heading="Total Expenses"
           priceColor="text-red-700 dark:text-red-400"
-          price="156.10-"
+          price={`${expense.total.toLocaleString()}-`}
           svg={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +88,7 @@ const SimpleStats = () => {
         <StatsCard
           priceColor="text-green-700 dark:text-green-400"
           heading="Net Amount"
-          price="4,843.90"
+          price={net.netAmount.toLocaleString()}
           svg={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +115,7 @@ const SimpleStats = () => {
         <StatsCard
           priceColor="text-blue-700 dark:text-blue-400"
           heading="Budget Remaining"
-          price="693.90"
+          price={budgetLeft.budgetLeft.toLocaleString()}
           svg={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +149,7 @@ const SimpleStats = () => {
       <div className="max-[925px]:flex-col w-full h-auto flex gap-5 justify-center items-stretch">
         <ChartProgress />
 
-        <Transactions />
+        <Transactions transactions={transactions} />
       </div>
     </div>
   );
