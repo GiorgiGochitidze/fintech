@@ -21,6 +21,6 @@ export async function getBudgetLeft() {
 }
 
 export async function getAllTransactions() {
-  const res = await fetch(`${API_URL}/`, { cache: "no-store" });
+  const res = await fetch(`${API_URL}/transactions`, { cache: "no-store" });
   return res.json();
 }
