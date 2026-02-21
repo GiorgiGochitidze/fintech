@@ -5,7 +5,14 @@
 :root{
   --income-primary: #016630;
   --income-secondary: #0A110D;
-  --income-text: #086335;
+  --income-text: #05D26B;
+  --income-text-primary: #086335;
+
+  --progress-primary: #10B981;
+  --progress-secondary: #364153;
+
+  --transactions-income: #00A63E;
+  --transactions-expense: #E7000B;
 
   --expense-primary: #FF0000;
   --expense-secondary: #160B0C;

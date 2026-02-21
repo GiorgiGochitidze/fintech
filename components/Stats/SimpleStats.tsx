@@ -1,5 +1,8 @@
-import ChartBar from "./ChartBar";
+import ChartBar from "./Charts/ChartBar";
+import ChartPie from "./Charts/ChartPie";
+import ChartProgress from "./Charts/ProgressChart/ChartProgress";
 import StatsCard from "./StatsCard";
+import Transactions from "./Transactions/Transactions";
 
 const SimpleStats = () => {
   return (
@@ -7,12 +10,12 @@ const SimpleStats = () => {
       <div className="max-[460px]:flex-col max-[460px]:gap-5 max-[460px]:items-center w-full h-auto flex justify-between">
         <div className="flex flex-col items-start max-[460px]:items-center">
           <h2 className="font-bold text-2xl">Dashboard</h2>
-          <p className="text-[var(--secondary-text)]">
+          <p className="max-[460px]:text-center text-[var(--secondary-text)]">
             Overview for February 2026
           </p>
         </div>
-        <button className="w-37.5 h-9.5 bg-white rounded-lg text-black flex justify-center items-center gap-2 hover:cursor-pointer hover:bg-[#E2E2E2]">
-          <span className="text-xl">+</span> Add Transaction
+        <button className="max-[460px]:w-full max-[670px]:w-10 w-37.5 h-9.5 bg-white rounded-lg text-black flex justify-center items-center gap-2 hover:cursor-pointer hover:bg-[#E2E2E2]">
+          <span className="text-xl max-[670px]:text-2xl">+</span><span className="max-[670px]:hidden max-[460px]:flex"> Add Transaction</span>
         </button>
       </div>
 
@@ -126,7 +129,17 @@ const SimpleStats = () => {
         />
       </div>
 
-      <ChartBar />
+      <div className="max-[925px]:flex-col w-full h-auto flex gap-5 justify-center items-stretch">
+        <ChartBar />
+
+        <ChartPie />
+      </div>
+
+      <div className="max-[925px]:flex-col w-full h-auto flex gap-5 justify-center items-stretch">
+        <ChartProgress />
+
+        <Transactions />
+      </div>
     </div>
   );
 };

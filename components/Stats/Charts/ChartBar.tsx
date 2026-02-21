@@ -47,12 +47,12 @@ const chartConfig = {
 
 const ChartBar = () => {
   return (
-    <Card>
+    <Card className="w-full flex flex-col justify-between">
       <CardHeader>
         <CardTitle className="text-white">Cash Flow Trend</CardTitle>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
+      <CardContent className="flex-1">
+        <ChartContainer config={chartConfig} className="h-full w-full">
           <BarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
@@ -92,7 +92,7 @@ const ChartBar = () => {
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
+          Showing total Income/Expenses for the last Year
         </div>
       </CardFooter>
     </Card>
